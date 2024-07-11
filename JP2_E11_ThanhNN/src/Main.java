@@ -71,6 +71,7 @@ public class Main {
                         BankService.getAccBalance(0);
                         break;
                     case 4:
+                        BankService.getTransactionByDate();
                         break;
                     case 5:
                         break;
