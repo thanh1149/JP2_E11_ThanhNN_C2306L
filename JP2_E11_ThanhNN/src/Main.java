@@ -41,31 +41,38 @@ public class Main {
 
         String rootPath = System.getProperty("user.dir");
         String customerPath = rootPath + "/JP2_E11_ThanhNN/data/Customer.txt";
-        String accountPath = rootPath + "\\JP2_E11_ThanhNN\\data\\Account.txt";
-        String transactionPath = rootPath + "\\JP2_E11_ThanhNN\\data\\Transaction.txt";
+        String accountPath = rootPath + "/JP2_E11_ThanhNN/data/Account.txt";
+        String transactionPath = rootPath + "/JP2_E11_ThanhNN/data/Transaction.txt";
 
         FILeService.getCustomerFromFile(customerPath);
-        FILeService.getTransactionFromFIle(accountPath);
+        FILeService.getAccountFromFile(accountPath);
         FILeService.getTransactionFromFIle(transactionPath);
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         do{
             System.out.println("1.Withdraw money.");
             System.out.println("2.Deposit money.");
-            System.out.println("3.Display transaction in specific time.");
-            System.out.println("4.Caculate interest.");
-            System.out.println("5.Exit");
+            System.out.println("3.Display balance via account id.");
+            System.out.println("4.Get transaction in specific time.");
+            System.out.println("5.Caculate interest.");
+            System.out.println("6.Exit");
+            System.out.print("Enter your choice:");
             try{
                 String choiceStr = bufferedReader.readLine();
                 choice = Integer.parseInt(choiceStr);
                 switch (choice){
                     case 1:
+                        BankService.withdraw(0,0);
                         break;
                     case 2:
+                        BankService.deposit(0,0);
                         break;
                     case 3:
+                        BankService.getAccBalance(0);
                         break;
                     case 4:
+                        break;
+                    case 5:
                         break;
                 }
             }catch (Exception e){

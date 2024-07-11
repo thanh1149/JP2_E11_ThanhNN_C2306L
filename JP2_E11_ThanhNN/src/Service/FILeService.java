@@ -28,11 +28,6 @@ public class FILeService{
     }
 
     //GET DATA FROM FILE
-    public static boolean checkPath(String path) {
-        Path filePath = Paths.get(path);
-        return Files.exists(filePath);
-    }
-
 
     public static void getCustomerFromFile(String customerPath){
         try {
@@ -93,12 +88,5 @@ public class FILeService{
             System.out.println(e.getMessage());
         }
     }
-
-    public static void printCustomers(String customerPath) {
-        for (Customer customer : customerList) {
-            System.out.println(customer);
-        }
-    }
-
 
 }

@@ -7,35 +7,13 @@ import java.util.List;
 import java.util.Optional;
 
 public class AccountService implements BankingGeneric<Account, Double> {
-//    private Account account;
-//    private double amount;
     public static List<Account> accounts;
 
     public AccountService(){}
-//    public AccountService(Account account, double amount){
-//        this.account = account;
-//        this.amount = amount;
-//    }
-//
-//    public Account getAccount() {
-//        return account;
-//    }
-//
-//    public void setAccount(Account account) {
-//        this.account = account;
-//    }
-//
-//    public double getAmount() {
-//        return amount;
-//    }
-//
-//    public void setAmount(double amount) {
-//        this.amount = amount;
-//    }
-//
-//    public Account transactionRequest() {
-//        return null;
-//    }
+
+    public boolean checkBalance(Account account, double amount){
+        return account.getBalance() >= amount;
+    }
 
     @Override
     public Account add(Account account) {
