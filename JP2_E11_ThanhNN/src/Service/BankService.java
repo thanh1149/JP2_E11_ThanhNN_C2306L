@@ -231,7 +231,7 @@ public class BankService {
                         .anyMatch(t -> t.getType() == Type.WITHDRAWAL);
 
                 if (checkWithdraw) {
-                    System.out.println("There have been withdraw in 30 days.");
+                    System.out.println("There have been withdraw in 30 days. No interest add.");
                     return account;
                 } else {
                     AddInterestThread addInterestThread = new AddInterestThread(account, account.getBalance());
@@ -244,7 +244,7 @@ public class BankService {
                     }
 
                     System.out.println("Acc balance:" +account.getBalance());
-                    return addInterestThread.getAccount();
+                    return account;
                 }
             } else {
                 AddInterestThread addInterestThread = new AddInterestThread(account, account.getBalance());
@@ -257,7 +257,7 @@ public class BankService {
                 }
 
                 System.out.println("Acc balance:" +account.getBalance());
-                return addInterestThread.getAccount();
+                return account;
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
