@@ -28,4 +28,5 @@ public abstract class AccountRepo {
     }
 
     public abstract Account transactionRequest();
+    public abstract Account addInterest();
 }

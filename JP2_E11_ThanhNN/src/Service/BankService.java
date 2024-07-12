@@ -203,5 +203,66 @@ public class BankService {
         }
     }
 
+    //Aply interset to account.
+    public static Account addInterestToAccount() {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            System.out.print("Enter account you want to check balance: ");
+            double accID = Double.parseDouble(bufferedReader.readLine());
+
+            Optional<Account> getAccID = accountService.findById(accID);
+            if (!getAccID.isPresent()) {
+                System.out.println("No account found.");
+                return null;
+            }
+            Account account = getAccID.get();
+
+            LocalDateTime now = LocalDateTime.now();
+            LocalDateTime transactionIn30Days = now.minusDays(30);
+
+            Optional<Map.Entry<Double, List<Transaction>>> transactionsInLast30Days = mapAccTransaction(transactionIn30Days, now).entrySet()
+                    .stream()
+                    .filter(entry -> entry.getKey().equals(account.getId()))
+                    .findFirst();
+
+            if (transactionsInLast30Days.isPresent()) {
+                List<Transaction> transactions = transactionsInLast30Days.get().getValue();
+                boolean checkWithdraw = transactions.stream()
+                        .anyMatch(t -> t.getType() == Type.WITHDRAWAL);
+
+                if (checkWithdraw) {
+                    System.out.println("There have been withdraw in 30 days.");
+                    return account;
+                } else {
+                    AddInterestThread addInterestThread = new AddInterestThread(account, account.getBalance());
+                    Thread iThread = new Thread(addInterestThread);
+                    try{
+                        iThread.start();
+                        iThread.join();
+                    }catch (IOError | InterruptedException e){
+                        System.out.println(e.getMessage());
+                    }
+
+                    System.out.println("Acc balance:" +account.getBalance());
+                    return addInterestThread.getAccount();
+                }
+            } else {
+                AddInterestThread addInterestThread = new AddInterestThread(account, account.getBalance());
+                Thread iThread2 = new Thread(addInterestThread);
+                try{
+                    iThread2.start();
+                    iThread2.join();
+                }catch (IOError | InterruptedException e){
+                    System.out.println(e.getMessage());
+                }
+
+                System.out.println("Acc balance:" +account.getBalance());
+                return addInterestThread.getAccount();
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
 
 }

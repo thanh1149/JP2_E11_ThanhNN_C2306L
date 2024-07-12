@@ -54,7 +54,7 @@ public class Main {
             System.out.println("2.Deposit money.");
             System.out.println("3.Display balance via account id.");
             System.out.println("4.Get transaction in specific time.");
-            System.out.println("5.Caculate interest.");
+            System.out.println("5.Display balance with interest in last 30 days.");
             System.out.println("6.Exit");
             System.out.print("Enter your choice:");
             try{
@@ -74,6 +74,7 @@ public class Main {
                         BankService.getTransactionByDate();
                         break;
                     case 5:
+                        BankService.addInterestToAccount();
                         break;
                 }
             }catch (Exception e){

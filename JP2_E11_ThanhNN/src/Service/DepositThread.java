@@ -14,6 +14,11 @@ public class DepositThread extends AccountRepo implements Runnable {
     }
 
     @Override
+    public Account addInterest() {
+        return null;
+    }
+
+    @Override
     public void run() {
         transactionRequest();
     }

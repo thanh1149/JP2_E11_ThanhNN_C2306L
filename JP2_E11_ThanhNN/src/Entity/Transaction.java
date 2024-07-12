@@ -68,6 +68,10 @@ public class Transaction {
     public void setStatus(Status status) {
         this.status = status;
     }
+    public boolean isWithdrawal() {
+        return this.type == Type.WITHDRAWAL;
+    }
+
 
     @Override
     public String toString() {
